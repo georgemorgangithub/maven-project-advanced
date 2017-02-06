@@ -1,0 +1,50 @@
+[1mdiff --git a/pom.xml b/pom.xml[m
+[1mindex cbf65b0..e702e75 100644[m
+[1m--- a/pom.xml[m
+[1m+++ b/pom.xml[m
+[36m@@ -168,6 +168,12 @@[m
+             <version>${mule.version}</version>[m
+             <scope>provided</scope>[m
+         </dependency>[m
+[32m+[m[32m    <dependency>[m
+[32m+[m[32m            <groupId>org.mule.modules</groupId>[m
+[32m+[m[32m            <artifactId>mule-module-json</artifactId>[m
+[32m+[m[32m            <version>${mule.version}</version>[m
+[32m+[m[32m            <scope>provided</scope>[m
+[32m+[m[32m        </dependency>[m
+     </dependencies>[m
+ [m
+ 	<repositories>[m
+[1mdiff --git a/src/main/app/maven-project.xml b/src/main/app/maven-project.xml[m
+[1mindex e29c0a6..a845a57 100644[m
+[1m--- a/src/main/app/maven-project.xml[m
+[1m+++ b/src/main/app/maven-project.xml[m
+[36m@@ -1,6 +1,6 @@[m
+ <?xml version="1.0" encoding="UTF-8"?>[m
+ [m
+[31m-<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"[m
+[32m+[m[32m<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"[m
+ 	xmlns:spring="http://www.springframework.org/schema/beans" [m
+ 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"[m
+ 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd[m
+[36m@@ -8,7 +8,8 @@[m [mhttp://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor[m
+ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd[m
+ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd[m
+ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd[m
+[31m-http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd">[m
+[32m+[m[32mhttp://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd[m
+[32m+[m[32mhttp://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">[m
+     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>[m
+     <spring:beans>[m
+         <spring:bean id="Bean" name="Bean" class="com.mulesoft.training.Database"/>[m
+[36m@@ -25,7 +26,7 @@[m [mhttp://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/[m
+             <db:parameterized-query><![CDATA[SELECT *[m
+ FROM flights]]></db:parameterized-query>[m
+         </db:select>[m
+[31m-        <object-to-string-transformer doc:name="Object to String"/>[m
+[32m+[m[32m        <json:object-to-json-transformer doc:name="Object to JSON"/>[m
+         <jms:outbound-endpoint queue="flights" connector-ref="Active_MQ" doc:name="JMS"/>[m
+     </flow>[m
+     <flow name="logFlights">[m
+warning: LF will be replaced by CRLF in src/main/app/maven-project.xml.
+The file will have its original line endings in your working directory.
